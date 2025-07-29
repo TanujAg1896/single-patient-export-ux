@@ -208,16 +208,10 @@ const PatientReportDownload = () => {
                 <div className="bg-warning/10 border border-warning/20 rounded-lg p-4">
                   <h4 className="font-medium text-warning-foreground mb-2">Important Notice</h4>
                   <div className="text-sm text-warning-foreground/80 space-y-2">
-                    <p>• Generate reports only when necessary for patient care or legal requirements</p>
-                    <p>• Reports contain sensitive medical information and should be handled securely</p>
-                    <p>• Large patient files may take several minutes to compile</p>
-                    <p>• Ensure you have proper authorization before downloading patient data</p>
-                    <p>• All report downloads are logged and audited for compliance purposes</p>
-                    <p>• Do not share patient reports via unsecured channels or email</p>
-                    <p>• Store downloaded reports in HIPAA-compliant storage systems only</p>
-                    <p>• Delete temporary files immediately after use to protect patient privacy</p>
-                    <p>• Verify patient identity before generating any medical reports</p>
-                    <p>• Reports may include billing, diagnostic, and treatment history data</p>
+                    <p>1. Generate reports only when necessary for patient care or legal requirements</p>
+                    <p>2. Reports contain sensitive medical information. Please use wisely. Do not share via unsecured channels and store only in HIPAA compliant systems.</p>
+                    <p>3. Ensure you have proper authorization before downloading patient data. All report downloads requests are logged for compliance purposes</p>
+                    <p>4. Once your usecase is sufficed, please delete the downloaded files from all local storage systems.</p>
                   </div>
                 </div>
               </div>
