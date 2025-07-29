@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { FileText, Search, Download, User, Phone, MapPin, Calendar, Clock } from "lucide-react";
+
 interface PatientInfo {
   id: string;
   name: string;
@@ -13,17 +14,18 @@ interface PatientInfo {
   phone: string;
   location: string;
 }
+
 const PatientReportDownload = () => {
   const [patientRefNumber, setPatientRefNumber] = useState("");
   const [patientInfo, setPatientInfo] = useState<PatientInfo | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
   const [searchError, setSearchError] = useState("");
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   const handleSearch = async () => {
     if (!patientRefNumber.trim()) return;
+    
     setIsSearching(true);
     setSearchError("");
     setPatientInfo(null);
@@ -45,6 +47,7 @@ const PatientReportDownload = () => {
         phone: "+1 (555) 123-4567",
         location: "New York, NY"
       };
+      
       setPatientInfo(mockPatient);
       setIsSearching(false);
       toast({
@@ -53,6 +56,7 @@ const PatientReportDownload = () => {
       });
     }, 1500);
   };
+
   const handleGenerateReport = () => {
     setShowDownloadDialog(true);
 
@@ -65,12 +69,15 @@ const PatientReportDownload = () => {
       });
     }, 3000);
   };
+
   const resetSearch = () => {
     setPatientRefNumber("");
     setPatientInfo(null);
     setSearchError("");
   };
-  return <div className="min-h-screen bg-background p-6">
+
+  return (
+    <div className="min-h-screen bg-background p-6">
       <div className="max-w-4xl mx-auto space-y-8">
         
         {/* Header */}
@@ -101,34 +108,55 @@ const PatientReportDownload = () => {
                 Patient Reference Number
               </Label>
               <div className="flex gap-3">
-                <Input id="patientRef" placeholder="Enter patient reference number..." value={patientRefNumber} onChange={e => setPatientRefNumber(e.target.value)} className="flex-1 transition-all duration-200 focus:shadow-lg" disabled={isSearching} />
-                <Button onClick={handleSearch} disabled={!patientRefNumber.trim() || isSearching} variant="medical" className="min-w-[120px]">
-                  {isSearching ? <>
+                <Input
+                  id="patientRef"
+                  placeholder="Enter patient reference number..."
+                  value={patientRefNumber}
+                  onChange={(e) => setPatientRefNumber(e.target.value)}
+                  className="flex-1 transition-all duration-200 focus:shadow-lg"
+                  disabled={isSearching}
+                />
+                <Button
+                  onClick={handleSearch}
+                  disabled={!patientRefNumber.trim() || isSearching}
+                  variant="medical"
+                  className="min-w-[120px]"
+                >
+                  {isSearching ? (
+                    <>
                       <Clock className="w-4 h-4 mr-2 animate-spin" />
                       Searching...
-                    </> : <>
+                    </>
+                  ) : (
+                    <>
                       <Search className="w-4 h-4 mr-2" />
                       Search
-                    </>}
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
             
             {/* Error Message */}
-            {searchError && <div className="mt-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+            {searchError && (
+              <div className="mt-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
                 <p className="text-sm text-destructive">{searchError}</p>
-              </div>}
+              </div>
+            )}
             
-            {(patientInfo || searchError) && <div className="mt-4">
+            {(patientInfo || searchError) && (
+              <div className="mt-4">
                 <Button onClick={resetSearch} variant="outline" size="sm" className="text-muted-foreground">
                   New Search
                 </Button>
-              </div>}
+              </div>
+            )}
           </CardContent>
         </Card>
 
         {/* Patient Information */}
-        {patientInfo && <Card className="bg-gradient-card shadow-card border-0 transform transition-all duration-500 hover:shadow-lg">
+        {patientInfo && (
+          <Card className="bg-gradient-card shadow-card border-0 transform transition-all duration-500 hover:shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="w-5 h-5 text-primary" />
@@ -179,7 +207,13 @@ const PatientReportDownload = () => {
 
               {/* Generate Report Section */}
               <div className="border-t pt-6 space-y-4">
-                <Button onClick={handleGenerateReport} variant="medical" size="lg" className="w-full md:w-auto" disabled={showDownloadDialog}>
+                <Button
+                  onClick={handleGenerateReport}
+                  variant="medical"
+                  size="lg"
+                  className="w-full md:w-auto"
+                  disabled={showDownloadDialog}
+                >
                   <Download className="w-5 h-5 mr-2" />
                   Generate Report
                 </Button>
@@ -187,16 +221,17 @@ const PatientReportDownload = () => {
                 <div className="bg-warning/10 border border-warning/20 rounded-lg p-4">
                   <h4 className="font-medium text-warning-foreground mb-2">Important Notice</h4>
                   <div className="text-sm text-warning-foreground/80 space-y-2">
-                    <p>1. Generate reports only when necessary for patient care or legal requirements. Ensure you have proper authorization before downloading patient data. All report downloads requests are logged for compliance purposes</p>
-                    <p>2. Reports contain sensitive medical information. Please use wisely. Do not share via unsecured channels and store only in HIPAA compliant systems. Once your usecase is sufficed, please delete the downloaded files from all local storage systems.</p>
-                    
-                    
+                    <p>1. Generate reports only when necessary for patient care or legal requirements</p>
+                    <p>2. Reports contain sensitive medical information. Please use wisely. Do not share via unsecured channels and store only in HIPAA compliant systems.</p>
                     <p>3. Your file is being downloaded as a .zip file that has JSON files of all patient information and their care journey with Woundtech. You can access the file in any local text editors file like Notepad++ or your Chrome browser.</p>
+                    <p>4. Ensure you have proper authorization before downloading patient data. All report downloads requests are logged for compliance purposes</p>
+                    <p>5. Once your usecase is sufficed, please delete the downloaded files from all local storage systems.</p>
                   </div>
                 </div>
               </div>
             </CardContent>
-          </Card>}
+          </Card>
+        )}
 
         {/* Download Progress Dialog */}
         <Dialog open={showDownloadDialog} onOpenChange={setShowDownloadDialog}>
@@ -217,6 +252,8 @@ const PatientReportDownload = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PatientReportDownload;
