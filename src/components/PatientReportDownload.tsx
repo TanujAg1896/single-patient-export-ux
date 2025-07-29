@@ -212,6 +212,12 @@ const PatientReportDownload = () => {
                     <p>• Reports contain sensitive medical information and should be handled securely</p>
                     <p>• Large patient files may take several minutes to compile</p>
                     <p>• Ensure you have proper authorization before downloading patient data</p>
+                    <p>• All report downloads are logged and audited for compliance purposes</p>
+                    <p>• Do not share patient reports via unsecured channels or email</p>
+                    <p>• Store downloaded reports in HIPAA-compliant storage systems only</p>
+                    <p>• Delete temporary files immediately after use to protect patient privacy</p>
+                    <p>• Verify patient identity before generating any medical reports</p>
+                    <p>• Reports may include billing, diagnostic, and treatment history data</p>
                   </div>
                 </div>
               </div>
