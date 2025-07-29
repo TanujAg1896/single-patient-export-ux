@@ -18,15 +18,25 @@ const PatientReportDownload = () => {
   const [patientInfo, setPatientInfo] = useState<PatientInfo | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
+  const [searchError, setSearchError] = useState("");
   const {
     toast
   } = useToast();
   const handleSearch = async () => {
     if (!patientRefNumber.trim()) return;
     setIsSearching(true);
+    setSearchError("");
+    setPatientInfo(null);
 
     // Simulate API call
     setTimeout(() => {
+      // Check for error case
+      if (patientRefNumber.trim() === "REF123") {
+        setSearchError("Patient Not Found. Please retry. If unsure, you can find the patient reference number in the Demographics section in the EMR");
+        setIsSearching(false);
+        return;
+      }
+
       // Mock patient data
       const mockPatient: PatientInfo = {
         id: patientRefNumber,
@@ -58,6 +68,7 @@ const PatientReportDownload = () => {
   const resetSearch = () => {
     setPatientRefNumber("");
     setPatientInfo(null);
+    setSearchError("");
   };
   return <div className="min-h-screen bg-background p-6">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -103,7 +114,12 @@ const PatientReportDownload = () => {
               </div>
             </div>
             
-            {patientInfo && <div className="mt-4">
+            {/* Error Message */}
+            {searchError && <div className="mt-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+                <p className="text-sm text-destructive">{searchError}</p>
+              </div>}
+            
+            {(patientInfo || searchError) && <div className="mt-4">
                 <Button onClick={resetSearch} variant="outline" size="sm" className="text-muted-foreground">
                   New Search
                 </Button>
@@ -163,7 +179,13 @@ const PatientReportDownload = () => {
 
               {/* Generate Report Section */}
               <div className="border-t pt-6 space-y-4">
-                <Button onClick={handleGenerateReport} variant="medical" size="lg" className="w-full md:w-auto">
+                <Button 
+                  onClick={handleGenerateReport} 
+                  variant="medical" 
+                  size="lg" 
+                  className="w-full md:w-auto"
+                  disabled={showDownloadDialog}
+                >
                   <Download className="w-5 h-5 mr-2" />
                   Generate Report
                 </Button>
