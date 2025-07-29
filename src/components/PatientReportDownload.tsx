@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { FileText, Search, Download, User, Phone, MapPin, Calendar, Clock } from "lucide-react";
-
 interface PatientInfo {
   id: string;
   name: string;
@@ -14,19 +13,18 @@ interface PatientInfo {
   phone: string;
   location: string;
 }
-
 const PatientReportDownload = () => {
   const [patientRefNumber, setPatientRefNumber] = useState("");
   const [patientInfo, setPatientInfo] = useState<PatientInfo | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleSearch = async () => {
     if (!patientRefNumber.trim()) return;
-    
     setIsSearching(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       // Mock patient data
@@ -37,37 +35,31 @@ const PatientReportDownload = () => {
         phone: "+1 (555) 123-4567",
         location: "New York, NY"
       };
-      
       setPatientInfo(mockPatient);
       setIsSearching(false);
-      
       toast({
         title: "Patient Found",
-        description: "Patient information loaded successfully.",
+        description: "Patient information loaded successfully."
       });
     }, 1500);
   };
-
   const handleGenerateReport = () => {
     setShowDownloadDialog(true);
-    
+
     // Simulate report generation
     setTimeout(() => {
       setShowDownloadDialog(false);
       toast({
         title: "Report Generated",
-        description: "Your patient report has been downloaded successfully.",
+        description: "Your patient report has been downloaded successfully."
       });
     }, 3000);
   };
-
   const resetSearch = () => {
     setPatientRefNumber("");
     setPatientInfo(null);
   };
-
-  return (
-    <div className="min-h-screen bg-background p-6">
+  return <div className="min-h-screen bg-background p-6">
       <div className="max-w-4xl mx-auto space-y-8">
         
         {/* Header */}
@@ -98,53 +90,29 @@ const PatientReportDownload = () => {
                 Patient Reference Number
               </Label>
               <div className="flex gap-3">
-                <Input
-                  id="patientRef"
-                  placeholder="Enter patient reference number..."
-                  value={patientRefNumber}
-                  onChange={(e) => setPatientRefNumber(e.target.value)}
-                  className="flex-1 transition-all duration-200 focus:shadow-lg"
-                  disabled={isSearching}
-                />
-                <Button
-                  onClick={handleSearch}
-                  disabled={!patientRefNumber.trim() || isSearching}
-                  variant="medical"
-                  className="min-w-[120px]"
-                >
-                  {isSearching ? (
-                    <>
+                <Input id="patientRef" placeholder="Enter patient reference number..." value={patientRefNumber} onChange={e => setPatientRefNumber(e.target.value)} className="flex-1 transition-all duration-200 focus:shadow-lg" disabled={isSearching} />
+                <Button onClick={handleSearch} disabled={!patientRefNumber.trim() || isSearching} variant="medical" className="min-w-[120px]">
+                  {isSearching ? <>
                       <Clock className="w-4 h-4 mr-2 animate-spin" />
                       Searching...
-                    </>
-                  ) : (
-                    <>
+                    </> : <>
                       <Search className="w-4 h-4 mr-2" />
                       Search
-                    </>
-                  )}
+                    </>}
                 </Button>
               </div>
             </div>
             
-            {patientInfo && (
-              <div className="mt-4">
-                <Button
-                  onClick={resetSearch}
-                  variant="outline"
-                  size="sm"
-                  className="text-muted-foreground"
-                >
+            {patientInfo && <div className="mt-4">
+                <Button onClick={resetSearch} variant="outline" size="sm" className="text-muted-foreground">
                   New Search
                 </Button>
-              </div>
-            )}
+              </div>}
           </CardContent>
         </Card>
 
         {/* Patient Information */}
-        {patientInfo && (
-          <Card className="bg-gradient-card shadow-card border-0 transform transition-all duration-500 hover:shadow-lg">
+        {patientInfo && <Card className="bg-gradient-card shadow-card border-0 transform transition-all duration-500 hover:shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="w-5 h-5 text-primary" />
@@ -186,7 +154,7 @@ const PatientReportDownload = () => {
                   <div className="p-4 bg-accent/30 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <MapPin className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium text-muted-foreground">Location</span>
+                      <span className="text-sm font-medium text-muted-foreground">Market</span>
                     </div>
                     <p className="text-lg font-semibold">{patientInfo.location}</p>
                   </div>
@@ -195,12 +163,7 @@ const PatientReportDownload = () => {
 
               {/* Generate Report Section */}
               <div className="border-t pt-6 space-y-4">
-                <Button
-                  onClick={handleGenerateReport}
-                  variant="medical"
-                  size="lg"
-                  className="w-full md:w-auto"
-                >
+                <Button onClick={handleGenerateReport} variant="medical" size="lg" className="w-full md:w-auto">
                   <Download className="w-5 h-5 mr-2" />
                   Generate Report
                 </Button>
@@ -216,8 +179,7 @@ const PatientReportDownload = () => {
                 </div>
               </div>
             </CardContent>
-          </Card>
-        )}
+          </Card>}
 
         {/* Download Progress Dialog */}
         <Dialog open={showDownloadDialog} onOpenChange={setShowDownloadDialog}>
@@ -238,8 +200,6 @@ const PatientReportDownload = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PatientReportDownload;
