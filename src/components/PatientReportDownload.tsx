@@ -175,6 +175,7 @@ const PatientReportDownload = () => {
                     <p>2. Reports contain sensitive medical information. Please use wisely. Do not share via unsecured channels and store only in HIPAA compliant systems.</p>
                     <p>3. Ensure you have proper authorization before downloading patient data. All report downloads requests are logged for compliance purposes</p>
                     <p>4. Once your usecase is sufficed, please delete the downloaded files from all local storage systems.</p>
+                    <p>5. Your file is being downloaded as a .zip file that has JSON files of all patient information and their care journey with Woundtech. You can access the file in any local text editors file like Notepad++ or your Chrome browser.</p>
                   </div>
                 </div>
               </div>
