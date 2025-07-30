@@ -65,7 +65,7 @@ const PatientReportDownload = () => {
       setShowDownloadDialog(false);
       toast({
         title: "Report Generated",
-        description: "Your patient report has been downloaded successfully."
+        description: "Your report has been generated and a downloadable link is available in the NOTIFICATIONS > ADMIN in the EMR."
       });
     }, 3000);
   };
