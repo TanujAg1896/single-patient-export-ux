@@ -240,8 +240,8 @@ const PatientReportDownload = () => {
                 Generating Report
               </DialogTitle>
               <DialogDescription className="text-left">
-                Your report is being downloaded. It might take some time depending on the volume of data 
-                associated with the patient. Feel free to leave this page.
+                Your report is being generated. It might take some time depending on the volume of data 
+                associated with the patient. Feel free to leave this page and access a downloadable link in the NOTIFICATIONS {">"} ADMIN in the EMR.
               </DialogDescription>
             </DialogHeader>
             <div className="flex justify-center py-4">
