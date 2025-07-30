@@ -221,11 +221,9 @@ const PatientReportDownload = () => {
                 <div className="bg-warning/10 border border-warning/20 rounded-lg p-4">
                   <h4 className="font-medium text-warning-foreground mb-2">Important Notice</h4>
                   <div className="text-sm text-warning-foreground/80 space-y-2">
-                    <p>1. Generate reports only when necessary for patient care or legal requirements</p>
-                    <p>2. Reports contain sensitive medical information. Please use wisely. Do not share via unsecured channels and store only in HIPAA compliant systems.</p>
-                    <p>3. Your file is being downloaded as a .zip file that has JSON files of all patient information and their care journey with Woundtech. You can access the file in any local text editors file like Notepad++ or your Chrome browser.</p>
-                    <p>4. Ensure you have proper authorization before downloading patient data. All report downloads requests are logged for compliance purposes</p>
-                    <p>5. Once your usecase is sufficed, please delete the downloaded files from all local storage systems.</p>
+                    <p>1. Your file will be generated as a .zip file that has JSON files of all patient information and their care journey with Woundtech. Once the report is generated, you can access the file from the NOTIFICATIONS {">"} ADMIN in the EMR. The JSON files can be opened in any local text editors file like Notepad++ or your Chrome browser.</p>
+                    <p>2. Generate reports only when necessary for patient care or legal requirements. Ensure you have proper authorization before downloading patient data. All report downloads requests are logged for compliance purposes.</p>
+                    <p>3. Reports contain sensitive medical information. Please use wisely. Do not share via unsecured channels and store only in HIPAA compliant systems. Once your usecase is sufficed, please delete the downloaded files from all local storage systems.</p>
                   </div>
                 </div>
               </div>
